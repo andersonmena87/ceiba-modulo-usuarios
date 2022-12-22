@@ -1,0 +1,39 @@
+<!--
+  Recuerde conservar los id, no deben ser modificados
+  ids = user-list__filter, user-list__table, user-list__table-item-[index], user-list__table-item-[index]-avatar, user-list__table-item-[index]-first_name, user-list__table-item-[index]-email, user-list__table-item-[index]-btn-delete
+  Remplazar [index] por el valor ejemplo "user-list__table-item-0"
+-->
+
+<div class="container">
+  <div class="card mx-auto pb-30">
+    <div class="search flex">
+      <input id="user-list__filter" name="filter" type="text" class="white large outlined" placeholder="Buscar" [(ngModel)] = "search" >
+    </div>
+    <table id="user-list__table">
+      <thead>
+        <tr>
+          <th>Foto</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Correo</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let user of users | filterUserByName:search">
+          <tr id="user-list__table-item-[index]">
+            <td><img src="{{user.avatar}}" /></td>
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>{{user.email}}</td>
+            <td>
+              <button id="user-list__table-item-[index]-btn-delete" (click)="deleteUser(user)" class="danger">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

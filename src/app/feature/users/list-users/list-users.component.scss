@@ -1,0 +1,17 @@
+.container {
+  .card {
+    width: 80%;
+
+    img {
+      border-radius: 50%;
+    }
+  }
+
+  .search {
+    justify-content: center;
+
+    input {
+      width: 300px;
+    }
+  }
+}

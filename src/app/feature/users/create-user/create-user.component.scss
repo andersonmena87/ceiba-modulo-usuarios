@@ -1,0 +1,14 @@
+.container {
+  margin: 0 20%;
+
+  .input-group {
+    flex-direction: column;
+    margin-top: 30px;
+    justify-content: space-between;
+    height: 18vh;
+  }
+
+  .card-actions {
+    justify-content: center;
+  }
+}

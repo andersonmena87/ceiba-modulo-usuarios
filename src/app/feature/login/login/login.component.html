@@ -1,0 +1,38 @@
+<!--
+  Recuerde conservar los id, no deben ser modificados
+  ids = login__email, login__password, login__password-error, login__email-error, login__btn-login
+-->
+<div class="container">
+  <div class="card flex">
+    <form (ngSubmit)="onLogin()" [formGroup]="formGroup">
+      <section class="card-text align-items-center">
+        <div class="justify-content-around align-items-center">
+          <h3 class="mt-0 mb-0">Iniciar sesión</h3>
+          <div class="flex input-group">
+            <input formControlName="email" id="login__email" class="white large" type="email" placeholder="Email" name="email"
+              [(ngModel)]="login_email" (input)="validateInput($event)" />
+            <p id="login__email-error" *ngIf="login_email_invalid" class="form-hint error-text">
+              Email is required
+            </p>
+            <input formControlName="password" required id="login__password" class="white large" type="password"
+              placeholder="Password" name="password" [(ngModel)]="login_password" (input)="validateInput($event)" />
+            <div id="login__password-error">
+              <p *ngIf="login_password_invalid" class="form-hint error-text">
+                Password is required
+              </p>
+              <p *ngIf="login_password_length_invalid" class="form-hint error-text">
+                The minimum of characters will be 8
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="card-actions">
+
+        <button id="login__btn-login" type="submit">
+          Ingresar
+        </button>
+      </section>
+    </form>
+  </div>
+</div>
