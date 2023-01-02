@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../shared/services/login/login.service';
 import {
-  AbstractControl,
-  EmailValidator,
-  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -29,6 +26,7 @@ export class LoginComponent implements OnInit {
     private login_service: LoginService,
     private formBuilder: FormBuilder
   ) {
+    this.login_service = new LoginService();
   }
 
   ngOnInit(): void {
@@ -50,7 +48,7 @@ export class LoginComponent implements OnInit {
       this.login_email_invalid = this.formGroup.get('email').invalid;
       const password = this.formGroup.get('password');
       this.login_password_invalid = password.hasError('required');
-      this.login_password_length_invalid = password.hasError('minlength')
+      this.login_password_length_invalid = password.hasError('minlength');
     }
 
   }

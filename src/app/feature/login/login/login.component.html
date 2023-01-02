@@ -14,7 +14,7 @@
             <p id="login__email-error" *ngIf="login_email_invalid" class="form-hint error-text">
               Email is required
             </p>
-            <input formControlName="password" required id="login__password" class="white large" type="password"
+            <input formControlName="password" id="login__password" class="white large" type="password"
               placeholder="Password" name="password" [(ngModel)]="login_password" (input)="validateInput($event)" />
             <div id="login__password-error">
               <p *ngIf="login_password_invalid" class="form-hint error-text">
@@ -28,7 +28,6 @@
         </div>
       </section>
       <section class="card-actions">
-
         <button id="login__btn-login" type="submit">
           Ingresar
         </button>

@@ -4,16 +4,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LoginService {
-
   /**
   * El nombre de este metodo no debería ser cambiado, pero de ser necesario podrías cambiar la firma
    * */
-  public login(email:string, password:string) {
-    const token = email+password;
-    this.setToken(token);
+  public login(email: string, password:string) {
+    this.setToken();
   }
 
-  private setToken(token: string){
+  private async setToken(): Promise<void>{
+    const token: string = 'QpwL5tke4Pnpja7X4';
     localStorage.setItem('token', token);
   }
 
@@ -21,13 +20,13 @@ export class LoginService {
     return localStorage.getItem('token');
   }
 
-  private getToken(){
+  private get getToken(): boolean{
     const token = localStorage.getItem('token');
     return token && token !== '' ? true : false;
   }
 
-  getLogged(){
-    return this.getToken();
+  getLogged (): boolean{
+    return this.getToken;
   }
 
 }

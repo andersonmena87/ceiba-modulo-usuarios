@@ -5,18 +5,18 @@
 
 <div class="container">
   <div class="card flex">
-    <form (ngSubmit)="save()" #form="ngForm">
+    <form (ngSubmit)="save()" [formGroup]="formGroup">
       <section class="card-text align-items-center">
         <div class="justify-content-around align-items-center">
           <h3 class="mt-0 mb-0">Crear usuario</h3>
           <div class="flex input-group">
-            <input required id="user-create__name" class="white large" type="text" placeholder="Nombre" name="name"
-              [(ngModel)]="name" (input)="validateInput($event)" />
+            <input formControlName="name" id="user-create__name" class="white large" type="text" placeholder="Nombre" name="name"
+               (input)="validateInput($event)" />
             <p *ngIf="name_invalid" id="user-create__name-error" class="form-hint error-text">
               Name is required
             </p>
-            <input required id="user-create__job" class="white large" type="text" placeholder="Trabajo" name="job"
-              [(ngModel)]="job" (input)="validateInput($event)" />
+            <input formControlName="job" id="user-create__job" class="white large" type="text" placeholder="Trabajo" name="job"
+               (input)="validateInput($event)" />
             <p *ngIf="job_invalid" id="user-create__job-error" class="form-hint error-text">
               Job is required
             </p>
@@ -24,7 +24,7 @@
         </div>
       </section>
       <section class="card-actions">
-        <button id="user-create__btn-create" type="submit" [disabled]="form.invalid">
+        <button id="user-create__btn-create" type="submit" [disabled]="formGroup.invalid">
           Crear
         </button>
       </section>

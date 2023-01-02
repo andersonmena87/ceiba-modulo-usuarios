@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { UserService } from '../shared/services/user/user.service';
@@ -9,43 +10,48 @@ import { UserService } from '../shared/services/user/user.service';
   styleUrls: ['./create-user.component.scss'],
 })
 export class CreateUserComponent implements OnInit {
-  name: string;
-  job: string;
+  formGroup: FormGroup;
 
-  name_invalid: boolean;
-  job_invalid: boolean;
+  name_invalid: boolean = true;
+  job_invalid: boolean = true;
 
   constructor(
     private readonly router: Router,
-    private user_service: UserService
-  ) {
+    private user_service: UserService,
+    private formBuilder: FormBuilder,
+  ) {}
+
+  ngOnInit(): void {
+    this.formGroup = this.formBuilder.group({
+      name: new FormControl('', [Validators.required]),
+      job: new FormControl('', [Validators.required]),
+    });
   }
 
-ngOnInit(): void {
-
-}
-
-  save(){
-    this.user_service.create(this.name, this.job).subscribe({
+  save() {
+    const name = this.formGroup.get('name').value;
+    const job = this.formGroup.get('job').value;
+    this.user_service.create(name, job).subscribe({
       complete: () => {
-        alert(`Usuario ${this.name} creado con exito`)
+        alert(`Usuario ${name} creado con exito`);
         this.redirectToListUsers();
       },
-      error: error => throwError(error)
-    })
+      error: (error) => throwError(error),
+    });
   }
 
-  validateInput(event: Event){
+  validateInput(event: Event) {
     const input = event.target as HTMLInputElement;
-    const invalid = !input.value ? true : false;
+    const field = this.formGroup.get(input.name);
+    const invalid = field.hasError('required');
 
-    switch (input.name){
-      case "name":
+    switch (input.name) {
+      case 'name':
         this.name_invalid = invalid;
-      break;
-      case "job":
+        break;
+      case 'job':
         this.job_invalid = invalid;
-      break;
+        break;
     }
   }
 

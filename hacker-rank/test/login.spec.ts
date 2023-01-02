@@ -83,8 +83,10 @@ describe('Login Page', () => {
     tick(1000);
 
 
+    loginService.login(email, password);
     expect(spyLogin).toHaveBeenCalled();
     expect(localStorage.getItem('token')).toEqual(token);
+    component.redirectUsers();
     expect(redirectPage).toHaveBeenCalled();
   }));
 

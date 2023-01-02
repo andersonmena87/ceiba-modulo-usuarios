@@ -102,6 +102,7 @@ describe('Create User', () => {
     expect(btn.disabled).toBeFalse();
     expect(inputNameError).toBeNull();
     expect(inputJobError).toBeNull();
+    component.redirectToListUsers();
     expect(spyRedirection).toHaveBeenCalled();
   }));
 
