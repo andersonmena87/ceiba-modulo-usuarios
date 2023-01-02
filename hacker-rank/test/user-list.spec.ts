@@ -72,67 +72,67 @@ describe('List users', () => {
     btnDelete = SELECTORS.USER.LIST.tableItemBtnDelete(index);
 
 
-    //expect(avatar.tagName).toEqual('IMG');
+    expect(avatar.tagName).toEqual('IMG');
     expect(btnDelete.tagName).toEqual('BUTTON');
-    // expect(email.textContent).toEqual(data[index].email);
-    // expect(firstName.textContent).toEqual(data[index].first_name);
+    expect(email.textContent).toEqual(data[index].email);
+    expect(firstName.textContent).toEqual(data[index].first_name);
   }));
 
-  // it('Elimina un usuario de la lista', fakeAsync(() => {
+  it('Elimina un usuario de la lista', fakeAsync(() => {
 
-  //   let btnDelete: HTMLButtonElement;
-  //   const index = 0;
-  //   const spyDeleteUser = spyOn(usersService, 'deleteUserForIndex').and.callThrough();
+    let btnDelete: HTMLButtonElement;
+    const index = 0;
+    const spyDeleteUser = spyOn(usersService, 'deleteUserForIndex').and.callThrough();
 
-  //   component.ngOnInit();
-  //   tick(1000);
-  //   fixture.detectChanges();
-  //   btnDelete = SELECTORS.USER.LIST.tableItemBtnDelete(index);
-  //   btnDelete.click();
+    component.ngOnInit();
+    tick(1000);
+    fixture.detectChanges();
+    btnDelete = SELECTORS.USER.LIST.tableItemBtnDelete(index);
+    btnDelete.click();
 
-  //   expect(spyDeleteUser).toHaveBeenCalled();
-  // }));
+    expect(spyDeleteUser).toHaveBeenCalled();
+  }));
 
-  // it('Filtra los el usuario por el nombre (filtra correctamente)', fakeAsync(() => {
+  it('Filtra los el usuario por el nombre (filtra correctamente)', fakeAsync(() => {
 
-  //   let table: HTMLTableElement;
-  //   const name = 'George';
+    let table: HTMLTableElement;
+    const name = 'George';
 
-  //   component.ngOnInit();
-  //   eventInput(SELECTORS.USER.LIST.inputSearch(), name);
-  //   tick(1000);
-  //   fixture.detectChanges();
-  //   table = SELECTORS.USER.LIST.table();
+    component.ngOnInit();
+    eventInput(SELECTORS.USER.LIST.inputSearch(), name);
+    tick(1000);
+    fixture.detectChanges();
+    table = SELECTORS.USER.LIST.table();
 
-  //   expect(table.querySelector('tbody').childElementCount).toEqual(1);
-  // }));
+    expect(table.querySelector('tbody').childElementCount).toEqual(1);
+  }));
 
-  // it('Filtra los el usuario por el nombre (no debe filtrar porque tiene menos de 3 caracteres)', fakeAsync(async () => {
+  it('Filtra los el usuario por el nombre (no debe filtrar porque tiene menos de 3 caracteres)', fakeAsync(async () => {
 
-  //   let table: HTMLTableElement;
-  //   const name = 'Ge';
-  //   const { data } = await new UsersMockService().getUsers();
+    let table: HTMLTableElement;
+    const name = 'Ge';
+    const { data } = await new UsersMockService().getUsers();
 
-  //   component.ngOnInit();
-  //   eventInput(SELECTORS.USER.LIST.inputSearch(), name);
-  //   tick(1000);
-  //   fixture.detectChanges();
-  //   table = SELECTORS.USER.LIST.table();
+    component.ngOnInit();
+    eventInput(SELECTORS.USER.LIST.inputSearch(), name);
+    tick(1000);
+    fixture.detectChanges();
+    table = SELECTORS.USER.LIST.table();
 
-  //   expect(table.querySelector('tbody').childElementCount).toEqual(data.length);
-  // }));
+    expect(table.querySelector('tbody').childElementCount).toEqual(data.length);
+  }));
 
-  // it('Filtra los el usuario por el nombre (no debe encontrar coincidencias)', fakeAsync(() => {
-  //   let table: HTMLTableElement;
-  //   const name = 'Sebastian';
+  it('Filtra los el usuario por el nombre (no debe encontrar coincidencias)', fakeAsync(() => {
+    let table: HTMLTableElement;
+    const name = 'Sebastian';
 
-  //   component.ngOnInit();
-  //   eventInput(SELECTORS.USER.LIST.inputSearch(), name);
-  //   tick(1000);
-  //   fixture.detectChanges();
-  //   table = SELECTORS.USER.LIST.table();
+    component.ngOnInit();
+    eventInput(SELECTORS.USER.LIST.inputSearch(), name);
+    tick(1000);
+    fixture.detectChanges();
+    table = SELECTORS.USER.LIST.table();
 
-  //   expect(table.querySelector('tbody').childElementCount).toEqual(0);
-  // }));
+    expect(table.querySelector('tbody').childElementCount).toEqual(0);
+  }));
 });
 

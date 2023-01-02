@@ -10,7 +10,7 @@ export class FilterUserByNamePipe implements PipeTransform {
     return users;
   }
 
-   const filter = users.filter(user => user.first_name.toLowerCase().includes(search.toLowerCase()));
+   const filter = users.filter(user => user.first_name.toLowerCase() === search.toLowerCase());
    return filter;
   }
 }

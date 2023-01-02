@@ -9,17 +9,19 @@ import { LoginService } from '@feature/login/shared/services/login/login.service
   providedIn: 'root',
 })
 export class UsersService {
-  headers: HttpHeaders;
+  headers: any = {};
   constructor(
     private http: HttpClient,
     private login_service: LoginService
   ){
-    this.headers = new HttpHeaders();
+    this.headers = {
+      //'Token': this.login_service.token,
+      //'Access-Control-Allow-Origin': '*'
+    }
   }
 
   async getUsers() {
-    this.createRequestOptions();
-    const response = await fetch('https://reqres.in/api/users?page=1', {headers: {token: this.login_service.token}})
+    const response = await fetch('https://reqres.in/api/users?page=1')
     .then(response => response.json());
     return response;
   }
@@ -28,12 +30,10 @@ export class UsersService {
     return this.http.post('https://reqres.in/api/users', {name, job}, {headers: this.headers});
   }
 
-  deleteUserForIndex(index: number) {
-    return this.http.delete(`https://reqres.in/api/users/${index}`, {headers: this.headers});
+  async deleteUserForIndex(index: number) {
+    const response = await fetch(`https://reqres.in/api/users/${index}`, {method: 'DELETE'})
+    .then(response => response);
+    return response?.status == 204 ?  true: false;
   }
 
-  private createRequestOptions() {
-    this.headers.set("Autorizacion", `${this.login_service.token}`);
-    this.headers.set("Access-Control-Allow-Origin", '*');
-  }
 }

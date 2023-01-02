@@ -23,16 +23,12 @@ export class ListUsersComponent implements OnInit {
     this.users = response.data;
   }
 
-  deleteUser(user: User) {
+  async deleteUser(user: User) {
     const { id, first_name, last_name } = user;
-    this.users_service.deleteUserForIndex(id).subscribe({
-      complete: () => {
-        alert(`${first_name} ${last_name} se eliminó con éxito`);
-        this.getUsers();
-      },
-      error: (error) => {
-        throwError(error);
-      },
-    });
+    const response: any = await this.users_service.deleteUserForIndex(id);
+    if(response){
+      this.users = this.users.filter(user => user.id != id);
+      alert(`${first_name} ${last_name} se eliminó con éxito`);
+    }
   }
 }
