@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { throwError } from 'rxjs';
+import { UsersService } from '../create-user/shared/services/users/users.service';
 import { User } from '../shared/models/user.model';
-import { UserService } from '../shared/services/user/user.service';
 
 @Component({
   selector: 'list-users',
@@ -11,28 +11,23 @@ import { UserService } from '../shared/services/user/user.service';
 export class ListUsersComponent implements OnInit {
   search: string = '';
   users: User[];
-  constructor(private user_service: UserService) {}
+  constructor(private users_service: UsersService) {
+  }
 
   ngOnInit() {
     this.getUsers();
   }
 
-  getUsers() {
-    this.user_service.list().subscribe({
-      next: (response: any) => {
-        this.users = response.data;
-      },
-      error: (error) => {
-        throwError(error);
-      },
-    });
+  async getUsers() {
+    const response: any = await this.users_service.getUsers();
+    this.users = response.data;
   }
 
   deleteUser(user: User) {
     const { id, first_name, last_name } = user;
-    this.user_service.delete(id).subscribe({
+    this.users_service.deleteUserForIndex(id).subscribe({
       complete: () => {
-        alert(`${first_name} ${last_name} se eliminó con exito`);
+        alert(`${first_name} ${last_name} se eliminó con éxito`);
         this.getUsers();
       },
       error: (error) => {

@@ -20,14 +20,14 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let user of users | filterUserByName:search">
-          <tr id="user-list__table-item-[index]">
-            <td><img src="{{user.avatar}}" /></td>
-            <td>{{user.first_name}}</td>
-            <td>{{user.last_name}}</td>
-            <td>{{user.email}}</td>
+        <ng-container *ngFor="let user of users | filterUserByName:search ;index as i">
+          <tr id="user-list__table-item-{{i}}">
+            <td><img id="user-list__table-item-{{i}}-avatar" src="{{user.avatar}}" /></td>
+            <td><span id="user-list__table-item-{{i}}-first_name">{{user.first_name}}</span></td>
+            <td><span id="user-list__table-item-{{i}}-first_name">{{user.last_name}}</span></td>
+            <td><span id="user-list__table-item-{{i}}-email">{{user.email}}</span></td>
             <td>
-              <button id="user-list__table-item-[index]-btn-delete" (click)="deleteUser(user)" class="danger">
+              <button id="user-list__table-item-{{i}}-btn-delete" (click)="deleteUser(user)" class="danger">
                 Eliminar
               </button>
             </td>

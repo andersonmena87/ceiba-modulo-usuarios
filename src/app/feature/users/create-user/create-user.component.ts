@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
-import { UserService } from '../shared/services/user/user.service';
+import { UsersService } from './shared/services/users/users.service';
 
 @Component({
   selector: 'app-create-user',
@@ -17,7 +17,7 @@ export class CreateUserComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private user_service: UserService,
+    private users_service: UsersService,
     private formBuilder: FormBuilder,
   ) {}
 
@@ -31,7 +31,7 @@ export class CreateUserComponent implements OnInit {
   save() {
     const name = this.formGroup.get('name').value;
     const job = this.formGroup.get('job').value;
-    this.user_service.create(name, job).subscribe({
+    this.users_service.createUser(name, job).subscribe({
       complete: () => {
         alert(`Usuario ${name} creado con exito`);
         this.redirectToListUsers();
